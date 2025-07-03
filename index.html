@@ -1,18 +1,260 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant">
+<!DOCTYPE html>
+<html lang="zh-Hant">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1> 這是我在 github 上的網站 </h1>
-    <h5>網站準備改版 施工中.....</h5>
-    <a href="https://www.google.com">Goolge 搜尋</a>
-    <h3>這是目前在 main_page_modification 的分支</h3>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>大台中房市分析</title>
+  <!-- 字體：溫潤田園風格 -->
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-    <a href="prodct.html">公司產品介紹</a>
-    <a href="Readme.html">Readme練習</a>
-    <a href="Readme.html">Readme練習</a>
+    body {
+      font-family: 'Merriweather', 'Noto Serif TC', serif;
+      background-color: #fdfaf5;
+      color: #5a4e3c;
+      line-height: 1.8;
+    }
+
+    header {
+      background-color: #a2c579;
+      color: #fff;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(120, 120, 120, 0.2);
+    }
+
+    header h1 {
+      margin-bottom: 10px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 15px;
+    }
+
+    nav ul li a {
+      color: #fff;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    nav ul li a:hover {
+      text-decoration: underline;
+    }
+
+    .breadcrumb {
+      background-color: #f0ebdf;
+      padding: 10px 20px;
+      font-size: 14px;
+      color: #856c4b;
+    }
+
+    .container {
+      display: flex;
+      padding: 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    main {
+      flex: 3;
+      margin-right: 20px;
+      background-color: #fffef9;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 6px rgba(150, 150, 150, 0.15);
+    }
+
+    article h2 {
+      margin-bottom: 10px;
+      color: #a95f2b;
+    }
+
+    aside {
+      flex: 1;
+    }
+
+    aside section {
+      background-color: #fffaf0;
+      border-left: 5px solid #c5aa6a;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      padding: 15px;
+      box-shadow: 0 0 5px rgba(200, 180, 140, 0.1);
+    }
+
+    aside h3 {
+      margin-bottom: 10px;
+      color: #8c6e4c;
+    }
+
+    a {
+      color: #a95f2b;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      background-color: #a2c579;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+
+    footer a {
+      color: #fff;
+      margin: 0 10px;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+
+      main {
+        margin-right: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>大台中房市分析</h1>
+  <nav>
+    <ul>
+      <li><a href="#">首頁</a></li>
+      <li><a href="#">分類</a></li>
+      <li><a href="#">專題發想</a></li>
+      <li><a href="#">專題成員</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="breadcrumb" id="breadcrumb">
+  <span>首頁</span>
+</div>
+
+<div class="container">
+  <main>
+    <div class="content-area" id="content">
+      <h2>大台中房市分析主頁</h2>
+      <p>請從右邊選擇一個項目來顯示內容。</p>
+    </div>      
+    <!-- <article>
+      <h2>如何使用 JavaScript 操作 DOM？</h2>
+      <p>本文將介紹如何使用 JavaScript 操作網頁上的 HTML 元素，包括選取、修改內容、增加事件等基本技巧。</p>
+      <p>舉例：</p>
+      <pre><code>document.querySelector("h1").textContent = "Hello World";</code></pre>
+    </article> -->
+  </main>
+
+  <aside>
+    <section>
+      <h3>📌 最新文章</h3>
+      <ul>
+        <li><a href="#">資料籌備</a></li>
+        <li><a href="#">實作分享</a></li>
+        <li><a href="#">專題討論進程</a></li>
+      </ul>
+    </section>
+    <section>
+      <h3>🏷️ 標籤雲</h3>
+      <p># #前端 #CSS #教學</p>
+    </section>
+    <section>
+      <div class="index-area">        
+        <div class="tree">
+          <ul>
+            <li class="parent">
+              <span class="toggle">資料蒐集</span>
+              <ul>
+                <li><a href="#" onclick="loadContent('../content1.html', '資料蒐集 > 時價登陸')">內容一-1</a></li>
+                <li><a href="#" onclick="loadContent('../content2.html', '資料蒐集 > 成交紀錄')">內容一-2</a></li>
+              </ul>
+            </li>
+            <li class="parent">
+              <span class="toggle">閱讀心得</span>
+              <ul>
+                <li><a href="#" onclick="loadContent('../content3.html', '閱讀心得 > 資料治理')">內容二-1</a></li>
+                <li><a href="#" onclick="loadContent('../content4.html', '閱讀心得 > 資料工程')">內容二-2</a></li>
+              </ul>
+            </li>
+            <li><a href="#" onclick="loadContent('../content5.html', '單一項目')">單一項目</a></li>
+            <li class="parent">
+              <span class="toggle">分析圖表</span>
+              <ul>
+                <li><a href="#" onclick="loadContent('../content6.html', '分析圖表 > 內容三-1')">內容三-1</a></li>
+                <li><a href="#" onclick="loadContent('../content7.html', '分析圖表 > 內容三-2')">內容三-2</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </aside>
+</div>
+
+<footer>
+  <p>© 2025 資料分析團隊 | <a href="#">隱私政策</a></p>
+  <p>
+    <a href="#">Facebook</a> |
+    <a href="#">Instagram</a> |
+    <a href="#">GitHub</a>
+  </p>
+</footer>
+
+<script>
+  document.querySelectorAll('.tree .toggle').forEach(function(toggle) {
+    toggle.addEventListener('click', function () {
+      this.parentElement.classList.toggle('open');
+    });
+  });
+
+  function loadContent(file, breadcrumbPath = '') {
+    fetch(file)
+    .then(response => {
+      if (!response.ok) throw new Error("載入失敗");
+      return response.text();
+    })
+    .then(html => {
+      document.getElementById('content').innerHTML = html;
+      updateBreadcrumb(breadcrumbPath);
+    })
+    .catch(error => {
+      document.getElementById('content').innerHTML = "<p>無法載入內容。</p>";
+      console.error(error);
+    });
+  }
+
+  function updateBreadcrumb(path) {
+    const container = document.getElementById('breadcrumb');
+    if (!path) {
+      container.innerHTML = '<span>首頁</span>';
+    } else {
+      const parts = path.split('>');
+      container.innerHTML = '<span>首頁</span> &gt; ' + parts.map((p, i) => {
+        return `<span class="${i === parts.length - 1 ? 'active' : ''}">${p.trim()}</span>`;
+      }).join(' &gt; ');
+    }
+  }
+</script>
 </body>
 </html>
