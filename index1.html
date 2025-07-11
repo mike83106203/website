@@ -6,7 +6,6 @@
     <title>房地產市場分析平台 - 數據驅動的投資決策</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <style>
-        /* 全域樣式 - 保持不變 */
         * {
             margin: 0;
             padding: 0;
@@ -27,19 +26,6 @@
             padding: 0 20px;
         }
 
-        /* 導覽列優化 */
-        header {
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            background: rgba(255, 255, 255, 0.1); /* 添加背景色，提高可見度 */
-            backdrop-filter: blur(10px); /* 保持模糊效果 */
-            transition: transform 0.3s ease-in-out;
-            height: auto; /* 自動調整高度 */
-            padding: 15px 0; /* 增加上下內距 */
-        }
-
         header.hidden {
             transform: translateY(-100%);
         }
@@ -51,7 +37,7 @@
         }
 
         .logo {
-            font-size: 1.6rem; /* 手機版調整字體大小 */
+            font-size: 1.8rem;
             font-weight: 700;
             text-decoration: none;
             color: white;
@@ -59,42 +45,11 @@
             align-items: center;
             gap: 0.5rem;
         }
-        
-        /* 漢堡選單按鈕樣式 */
-        .hamburger {
-            display: none; /* 預設隱藏 */
-            cursor: pointer;
-            flex-direction: column;
-            gap: 5px;
-            z-index: 1001;
-        }
 
-        .hamburger .bar {
-            width: 25px;
-            height: 3px;
-            background-color: white;
-            transition: all 0.3s ease-in-out;
-        }
-        
-        /* 漢堡選單動畫效果 */
-        .hamburger.open .bar:nth-child(1) {
-            transform: rotate(-45deg) translate(-5px, 6px);
-        }
-
-        .hamburger.open .bar:nth-child(2) {
-            opacity: 0;
-        }
-
-        .hamburger.open .bar:nth-child(3) {
-            transform: rotate(45deg) translate(-5px, -6px);
-        }
-
-        /* 導覽列連結樣式 */
         .nav-links {
             display: flex;
             list-style: none;
             gap: 2rem;
-            transition: all 0.3s ease;
         }
 
         .nav-links a {
@@ -125,9 +80,18 @@
             width: 100%;
         }
 
-        main.container {
-            margin-top: 80px;
+        header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            height: 80px; /* 明確指定高度 */
         }
+        
+        main.container {
+            margin-top: 80px; /* 與 header 高度一致 */
+        }
+
 
         .hero-section {
             background: rgba(255, 255, 255, 0.1);
@@ -141,7 +105,7 @@
         }
 
         .hero-section h1 {
-            font-size: 2.5rem; /* 手機版調整字體大小 */
+            font-size: 3rem;
             margin-bottom: 1rem;
             background: linear-gradient(45deg, #FFD700, #FFA500);
             -webkit-background-clip: text;
@@ -150,21 +114,92 @@
         }
 
         .hero-section p {
-            font-size: 1.1rem; /* 手機版調整字體大小 */
+            font-size: 1.2rem;
             opacity: 0.9;
             max-width: 600px;
             margin: 0 auto;
         }
 
-        /* Dashboard Grid - 保持不變，已為響應式 */
+        /* Dashboard Grid */
         .dashboard-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 2rem;
             margin-bottom: 2rem;
         }
-        
-        /* Analysis Tools - 調整間距和樣式 */
+
+        .dashboard-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-change {
+            font-size: 0.9rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+
+        .metric-change.positive {
+            background: rgba(34, 197, 94, 0.1);
+            color: #059669;
+        }
+
+        .metric-change.negative {
+            background: rgba(239, 68, 68, 0.1);
+            color: #dc2626;
+        }
+
+        /* Chart Container */
+        .chart-container {
+            position: relative;
+            height: 300px;
+            margin-top: 1rem;
+        }
+
+        .chart-container canvas {
+            border-radius: 10px;
+        }
+
+        /* Analysis Tools */
         .analysis-tools {
             background: rgba(255, 255, 255, 0.95);
             border-radius: 20px;
@@ -173,19 +208,24 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
-        
+
         .tool-controls {
             display: flex;
             gap: 1rem;
             margin-bottom: 2rem;
-            flex-wrap: wrap; /* 讓控制項在小螢幕上換行 */
+            flex-wrap: wrap;
         }
 
         .control-group {
             display: flex;
             flex-direction: column;
             gap: 0.5rem;
-            flex-grow: 1; /* 讓每個控制項佔據可用空間 */
+        }
+
+        .control-group label {
+            font-weight: 500;
+            color: #333;
+            font-size: 0.9rem;
         }
 
         select, input {
@@ -213,7 +253,6 @@
             cursor: pointer;
             transition: all 0.3s ease;
             align-self: flex-end;
-            width: auto; /* 調整寬度 */
         }
 
         .analyze-btn:hover {
@@ -221,7 +260,7 @@
             box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
         }
 
-        /* Market Trends - 保持不變，已為響應式 */
+        /* Market Trends */
         .market-trends {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -238,7 +277,59 @@
             transition: all 0.3s ease;
         }
 
-        /* Prediction Section - 保持不變，已為響應式 */
+        .trend-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .trend-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .trend-title {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .trend-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        .trend-indicator.up {
+            background: #10b981;
+        }
+
+        .trend-indicator.down {
+            background: #ef4444;
+        }
+
+        .trend-indicator.stable {
+            background: #f59e0b;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .trend-data {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .trend-value {
+            font-weight: 600;
+            color: #667eea;
+        }
+
+        /* Prediction Section */
         .prediction-section {
             background: rgba(255, 255, 255, 0.95);
             border-radius: 20px;
@@ -247,43 +338,82 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
-        
+
+        .prediction-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .prediction-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .prediction-subtitle {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
         .prediction-results {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 1.5rem;
         }
-        
-        /* 響應式設計 - 主要調整區 */
+
+        .prediction-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .prediction-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .prediction-card:hover::before {
+            left: 100%;
+        }
+
+        .prediction-period {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        .prediction-value {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .prediction-confidence {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+
+        /* Responsive Design */
         @media (max-width: 768px) {
-            /* 顯示漢堡選單，隱藏導覽列連結 */
             .nav-links {
                 display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 70px; /* 根據 header 高度調整 */
-                left: 0;
-                width: 100%;
-                background: rgba(102, 126, 234, 0.95);
-                backdrop-filter: blur(15px);
-                padding: 20px;
-                text-align: center;
-                gap: 1.5rem;
-                border-radius: 0 0 15px 15px;
-            }
-
-            .nav-links.open {
-                display: flex;
-            }
-            
-            .hamburger {
-                display: flex; /* 在手機版顯示漢堡選單 */
             }
             
             .hero-section h1 {
-                font-size: 2.2rem;
+                font-size: 2rem;
             }
-
+            
             .dashboard-grid {
                 grid-template-columns: 1fr;
             }
@@ -295,13 +425,90 @@
             .analyze-btn {
                 align-self: stretch;
             }
-            
-            /* 調整回頂部按鈕位置 */
-            #scrollToTopBtn {
-                right: 20px;
-                bottom: 20px;
-                padding: 8px 20px;
-                font-size: 16px;
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Scroll Animation */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 這裡開始是更突出的按鈕樣式 */
+        #scrollToTopBtn {
+            display: block; /* 確保按鈕始終顯示 */
+            position: fixed; /* 固定在頁面上的位置 */
+            bottom: 30px; /* 距離底部增加，讓它更顯眼 */
+            right: 40px; /* 距離右側增加 */
+            z-index: 100; /* 提高 z-index，確保在絕大多數內容之上 */
+            border: 2px solid #FF9A8B; /* 增加一個亮眼的邊框 */
+            outline: none; /* 移除點擊時的外框 */
+            background: linear-gradient(45deg, #FF6F61, #FF9A8B); /* 使用漸變背景色，更吸睛 */
+            color: whitesmoke; /* 文字顏色 */
+            cursor: pointer; /* 鼠標變成手型 */
+            padding: 10px 25px; /* 增加內邊距，讓按鈕更大 */
+            border-radius: 11px; /* 圓角更明顯 */
+            font-size: 20px; /* 字體更大 */
+            font-weight: bold; /* 字體加粗 */
+            letter-spacing: 1px; /* 增加字母間距，提升可讀性 */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4); /* 更明顯的陰影效果 */
+            transition: all 0.1s ease; /* 平滑過渡效果，針對所有屬性 */
+        }
+
+        #scrollToTopBtn:hover {
+            background: linear-gradient(45deg, #8bffb9, #c8ff61); /* 懸停時改變漸變方向或顏色 */
+            transform: translateY(-3px); /* 懸停時向上輕微移動，增加互動感 */
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.5); /* 懸停時陰影更深 */
+            border-color: #c8ff61; /* 懸停時邊框顏色變亮 */
+        }
+
+        #scrollToTopBtn:active {
+            transform: translateY(0); /* 點擊時回到原始位置 */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.658); /* 點擊時陰影變淺，模擬按壓效果 */
+        }
+
+        /* 針對按鈕內的文字應用動畫 */
+        #scrollToTopBtn span {
+            display: inline-block; /* 讓 span 可以應用 transform */
+            animation: bounce 1.2s infinite ease-in-out; /* 應用跳動動畫 */
+        }
+
+        /* 定義跳動動畫 */
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0); /* 開始和結束時在原位 */
+            }
+            20% {
+                transform: translateY(-5px); /* 向上跳動一點點 */
+            }
+            40% {
+                transform: translateY(0); /* 回到原位 */
+            }
+            60% {
+                transform: translateY(-2px); /* 再次向上跳動一點點（幅度小於第一次） */
+            }
+            80% {
+                transform: translateY(0); /* 回到原位 */
             }
         }
     </style>
@@ -312,13 +519,8 @@
             <a href="#" class="logo">
                 📊 台中房地產分析平台
             </a>
-            <div class="hamburger" id="hamburger">
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-            </div>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="Readme.html">關於我</a></li>
+            <ul class="nav-links">
+                <li><a href="Readme.html")">關於我</a></li>
                 <li><a href="#dashboard">儀表板</a></li>
                 <li><a href="#analysis">市場分析</a></li>
                 <li><a href="#prediction">價格預測</a></li>
@@ -389,6 +591,7 @@
                 <div class="control-group">
                     <label for="region">區域選擇</label>
                     <select id="region">
+    
                         <option value="Xitun District">西屯區</option>
                         <option value="Nantun District">南屯區</option>
                         <option value="Beitun District">北屯區</option>
@@ -419,6 +622,7 @@
                         <option value="Dajia District">大甲區</option>
                         <option value="Waipu District">外埔區</option>
                         <option value="Da'an District">大安區</option>
+                        
                     </select>
                 </div>
                 <div class="control-group">
@@ -535,7 +739,7 @@
     </main>
 
     <script>
-        // Chart.js Configuration - 保持不變
+        // Chart.js Configuration
         const chartConfig = {
             type: 'line',
             options: {
@@ -570,7 +774,7 @@
             }
         };
 
-        // Initialize Charts - 保持不變
+        // Initialize Charts
         function initCharts() {
             // Price Chart
             const priceCtx = document.getElementById('priceChart').getContext('2d');
@@ -633,7 +837,7 @@
             });
         }
 
-        // Analysis Function - 保持不變
+        // Analysis Function
         function runAnalysis() {
             const btn = document.querySelector('.analyze-btn');
             const btnText = document.getElementById('btnText');
@@ -641,9 +845,11 @@
             btnText.innerHTML = '<span class="loading"></span> 分析中...';
             btn.disabled = true;
             
+            // Simulate analysis process
             setTimeout(() => {
                 btnText.textContent = '分析完成！';
                 
+                // Show results (you can customize this part)
                 setTimeout(() => {
                     alert('分析結果已生成！\n\n根據您選擇的條件:\n• 投資潛力: 高\n• 風險等級: 中等\n• 預期收益: 8.5%\n• 建議: 適合中長期投資');
                     
@@ -653,7 +859,7 @@
             }, 2000);
         }
 
-        // Header hide/show on scroll - 保持不變
+        // Header hide/show on scroll
         let lastScrollTop = 0;
         const header = document.querySelector('header');
         
@@ -661,15 +867,17 @@
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             
             if (scrollTop > lastScrollTop && scrollTop > 100) {
+                // Scrolling down and past 100px
                 header.classList.add('hidden');
             } else {
+                // Scrolling up
                 header.classList.remove('hidden');
             }
             
             lastScrollTop = scrollTop;
         });
 
-        // Smooth scrolling for navigation links - 保持不變
+        // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -683,7 +891,7 @@
             });
         });
 
-        // Scroll animations - 保持不變
+        // Scroll animations
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -701,10 +909,11 @@
             observer.observe(el);
         });
 
-        // Initialize everything when page loads - 保持不變
+        // Initialize everything when page loads
         document.addEventListener('DOMContentLoaded', function() {
             initCharts();
             
+            // Simulate real-time data updates
             setInterval(() => {
                 const indicators = document.querySelectorAll('.trend-indicator');
                 indicators.forEach(indicator => {
@@ -714,25 +923,9 @@
                     }, 500);
                 });
             }, 5000);
-            
-            // 新增：漢堡選單的點擊事件
-            const hamburger = document.getElementById('hamburger');
-            const navLinks = document.getElementById('navLinks');
-            
-            hamburger.addEventListener('click', () => {
-                navLinks.classList.toggle('open');
-                hamburger.classList.toggle('open');
-            });
-            
-            // 點擊選單連結後關閉選單
-            navLinks.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => {
-                    navLinks.classList.remove('open');
-                    hamburger.classList.remove('open');
-                });
-            });
         });
 
+        // Add loading animation
         window.addEventListener('load', function() {
             document.body.style.opacity = '0';
             setTimeout(() => {
@@ -740,9 +933,13 @@
                 document.body.style.opacity = '1';
             }, 100);
         });
+    </script>
 
-        // 回頂部按鈕 - 保持不變
+    <button id="scrollToTopBtn" title="回到最上層"><span>TOP</span></button>
+
+    <script>
         const scrollToTopBtn = document.getElementById("scrollToTopBtn");
+
         scrollToTopBtn.addEventListener("click", function() {
             window.scrollTo({
                 top: 0,
@@ -750,7 +947,5 @@
             });
         });
     </script>
-
-    <button id="scrollToTopBtn" title="回到最上層"><span>TOP</span></button>
 </body>
 </html>
