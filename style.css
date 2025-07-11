@@ -1,0 +1,178 @@
+        /* General Body Styles */
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        margin: 0;
+        padding: 20px;
+        background-color: #f8f8f8;
+    }
+
+    /* Headings */
+    h1 {
+        text-align: center;
+        color: #2c3e50;
+        margin-bottom: 40px;
+        font-size: 2.5em;
+        border-bottom: 2px solid #eee;
+        padding-bottom: 15px;
+    }
+
+    h2 {
+        color: #34495e;
+        margin-top: 30px;
+        margin-bottom: 15px;
+        font-size: 1.8em;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 8px;
+    }
+
+    h3 {
+        color: #555;
+        margin-top: 20px;
+        margin-bottom: 10px;
+        font-size: 1.3em;
+    }
+
+    /* Paragraphs */
+    p {
+        margin-bottom: 15px;
+    }
+
+    /* Links */
+    a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    /* Badges */
+    .badge {
+        display: inline-block;
+        padding: 8px 15px;
+        margin: 0 5px;
+        border-radius: 20px;
+        background-color: #6c757d;
+        color: white;
+        font-size: 0.9em;
+        text-decoration: none;
+        white-space: nowrap; /* Prevent badges from breaking */
+    }
+
+    .badge:hover {
+        text-decoration: none;
+        opacity: 0.9;
+    }
+
+    .badge[href] {
+        background-color: #0366d6; /* GitHub specific color */
+    }
+
+    /* Section Styling */
+    .section {
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        padding: 30px;
+        margin-bottom: 30px;
+    }
+
+    /* Lists */
+    ul, ol {
+        margin-bottom: 15px;
+        padding-left: 25px;
+    }
+
+    ul li, ol li {
+        margin-bottom: 8px;
+    }
+
+    /* Code Blocks */
+    pre {
+        background-color: #eef;
+        border: 1px solid #ddd;
+        border-left: 5px solid #007bff;
+        padding: 15px;
+        margin-bottom: 20px;
+        overflow-x: auto; /* Enable horizontal scrolling for long lines */
+        border-radius: 5px;
+    }
+
+    code {
+        font-family: 'Cascadia Code', 'Fira Code', 'Consolas', 'Monaco', monospace;
+        color: #c7254e;
+        background-color: #f9f2f4;
+        padding: 2px 5px;
+        border-radius: 3px;
+    }
+
+    pre code {
+        color: #333;
+        background-color: transparent;
+        padding: 0;
+    }
+
+    /* Images */
+    img {
+        max-width: 100%;
+        height: auto;
+        display: block; /* Centers block images */
+        margin: 20px auto;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Image Captions */
+    p[style*="text-align: center; font-style: italic;"] {
+        font-size: 0.9em;
+        color: #666;
+        margin-top: -10px; /* Pull caption closer to image */
+        margin-bottom: 20px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        body {
+            padding: 15px;
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            font-size: 1.5em;
+        }
+
+        .badge {
+            margin: 5px 3px;
+            padding: 6px 12px;
+            font-size: 0.8em;
+        }
+
+        .section {
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        h1 {
+            font-size: 1.8em;
+        }
+
+        h2 {
+            font-size: 1.3em;
+        }
+
+        .badge {
+            display: block; /* Stack badges on very small screens */
+            margin: 5px auto;
+            width: fit-content;
+        }
+    }
+
